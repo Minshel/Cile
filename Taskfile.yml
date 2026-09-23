@@ -1,0 +1,85 @@
+version: "3"
+
+vars:
+  CXX: clang++
+  TARGET: app
+  BUILD: build
+
+  QT_HEADERS:
+    sh: qmake6 -query QT_INSTALL_HEADERS
+
+  QT_LIBS:
+    sh: qmake6 -query QT_INSTALL_LIBS
+
+  QT_PLUGINS:
+    sh: qmake6 -query QT_INSTALL_PLUGINS
+
+  QT_LIBEXECS:
+    sh: qmake6 -query QT_INSTALL_LIBEXECS
+
+  RCC: "{{.QT_LIBEXECS}}/rcc"
+  QRCFILE: resources.qrc
+  QRC_SRC: "{{.BUILD}}/qrc_resources.cpp"
+
+  INCLUDES: >-
+    -Iinclude
+    -I{{.QT_HEADERS}}
+    -I{{.QT_HEADERS}}/QtCore
+    -I{{.QT_HEADERS}}/QtGui
+    -I{{.QT_HEADERS}}/QtWidgets
+
+  CXXFLAGS: >-
+    -std=c++23
+    -Wall
+    -Wextra
+    -O2
+    -DQT_INSTALL_PLUGINS=\"{{.QT_PLUGINS}}\"
+    {{.INCLUDES}}
+
+  LIBS: >-
+    -L{{.QT_LIBS}}
+    -lQt6Widgets
+    -lQt6Gui
+    -lQt6Core
+
+tasks:
+  default:
+    deps:
+      - build
+
+  build:
+    cmds:
+      - mkdir -p {{.BUILD}}
+      - rm -f compile_commands.json
+      - |
+        echo " RCC     {{.QRCFILE}}"
+        {{.RCC}} {{.QRCFILE}} -o {{.QRC_SRC}}
+      - |
+        {{.CXX}} {{.CXXFLAGS}} \
+          -c {{.QRC_SRC}} \
+          -o {{.BUILD}}/qrc_resources.o
+      - |
+        bear --output compile_commands.json -- \
+          sh -c '
+            for src in $(find src -type f -name "*.cpp"); do
+              name=$(basename "$src" .cpp)
+
+              echo " CXX     $src"
+
+              {{.CXX}} {{.CXXFLAGS}} \
+                -c "$src" \
+                -o "{{.BUILD}}/$name.o" || exit 1
+            done
+          '
+      - |
+        {{.CXX}} {{.BUILD}}/*.o {{.LIBS}} -o {{.TARGET}}
+
+  clean:
+    cmds:
+      - rm -rf {{.BUILD}} {{.TARGET}} compile_commands.json
+
+  run:
+    deps:
+      - build
+    cmds:
+      - ./{{.TARGET}}

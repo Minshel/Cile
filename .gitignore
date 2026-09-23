@@ -1,0 +1,5 @@
+./build
+./app
+./compile-commands.json
+./.cache
+./.task

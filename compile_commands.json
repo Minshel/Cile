@@ -1,0 +1,24 @@
+[
+  {
+    "file": "src/main.cpp",
+    "arguments": [
+      "clang++",
+      "-std=c++23",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-DQT_INSTALL_PLUGINS=\"/nix/store/26vddq5pbmm4rjkhibwfy4xgngjy5cq5-qtbase-6.11.2/lib/qt-6/plugins\"",
+      "-Iinclude",
+      "-I/nix/store/26vddq5pbmm4rjkhibwfy4xgngjy5cq5-qtbase-6.11.2/include",
+      "-I/nix/store/26vddq5pbmm4rjkhibwfy4xgngjy5cq5-qtbase-6.11.2/include/QtCore",
+      "-I/nix/store/26vddq5pbmm4rjkhibwfy4xgngjy5cq5-qtbase-6.11.2/include/QtGui",
+      "-I/nix/store/26vddq5pbmm4rjkhibwfy4xgngjy5cq5-qtbase-6.11.2/include/QtWidgets",
+      "-c",
+      "src/main.cpp",
+      "-o",
+      "build/main.o"
+    ],
+    "directory": "/home/kotosho/Programming/CE",
+    "output": "build/main.o"
+  }
+]
