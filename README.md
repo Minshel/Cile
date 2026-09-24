@@ -11,6 +11,8 @@
 [![Qt 6](https://img.shields.io/badge/Qt-6-41CD52?style=flat-square&logo=qt)](https://www.qt.io/)
 <br>
 
+## [Project Roadmap](https://github.com/Minshel/Cile/blob/main/ROADMAP.md)
+
 <h3>Contributors</h3>
 <a href="https://github.com/minshel/Cile/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=minshel/Cile" />
