@@ -75,7 +75,7 @@ protected:
 
             painter.drawText(
                 0,
-                (geometry.top() + 3.5),
+                (geometry.top() + 3.52),
                 width() - 5,
                 geometry.height(),
                 Qt::AlignRight,

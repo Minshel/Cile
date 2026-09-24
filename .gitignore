@@ -1,5 +1,4 @@
 /app
 /build/
 /.cache/
-/.task/
 /compile-commands.json
