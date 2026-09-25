@@ -26,6 +26,22 @@
 | **[Bmake](https://github.com/arichardson/bmake)** or **[go-task](https://github.com/go-task/task)** | 3.48.0 |
 | **[Qt](https://www.qt.io/development/download-qt-installer-oss)** | 6.11.2 |
 
+<div align="left">
+  
+<h5>Bmake:</h5>
+
+```sh
+bmake clean all
+```
+
+<h5>go-task:</h5>
+
+```sh
+task build
+```
+
+<div align="center">
+
 <br>
 <h3>Fast Build</h3>
 
