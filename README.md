@@ -34,11 +34,11 @@
 <h5>NixOS:</h5>
 
 ```sh
-nix-shell --packages clangd go-task qt6.qtbase --run "task build"
+nix-shell -p $(cat cile.dependencies) --run "task build"
 ```
 
 <h5>Guix:</h5>
 
 ```sh
-guix shell clang-tools go-task qtbase -- task build
+guix shell $(cat cile.dependencies) -- task build
 ```
